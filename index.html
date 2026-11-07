@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Blackjack &mdash; Vegas Strip table</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="1920" height="1080"></canvas>
+
+  <div id="dealer">
+    <div class="screen">
+      <img id="dealer-img" src="assets/dealer/dealer.png" alt="Dealer">
+      <div class="live"><span></span>LIVE</div>
+      <div class="dname">GRADY &middot; TABLE 12</div>
+      <div id="caption"></div>
+    </div>
+  </div>
+
+  <div id="count" class="hidden"><div><span class="k">RUNNING</span><b id="rc">0</b></div><div><span class="k">TRUE</span><b id="tc">0.0</b></div><div><span class="k">DECKS LEFT</span><b id="decks">6.0</b></div></div>
+  <div id="message"></div>
+
+  <div id="bar">
+    <div class="group"><div class="label">BANKROLL</div><div class="value" id="bankroll">0</div></div>
+    <div class="group"><div class="label">BET</div><div class="value" id="bet">0</div></div>
+    <div id="tray"><button class="chip c5" data-v="5">5</button><button class="chip c25" data-v="25">25</button><button class="chip c100" data-v="100">100</button><button class="chip c500" data-v="500">500</button></div>
+    <div class="actions">
+      <button id="btn-deal" class="btn gold" title="Deal (Space / D)">DEAL</button>
+      <button id="btn-hit" class="btn" title="Hit (H)">HIT</button>
+      <button id="btn-stand" class="btn" title="Stand (S)">STAND</button>
+      <button id="btn-double" class="btn" title="Double (X)">DOUBLE</button>
+      <button id="btn-split" class="btn" title="Split (P)">SPLIT</button>
+      <button id="btn-surrender" class="btn" title="Surrender (R)">SURRENDER</button>
+      <button id="btn-ins-yes" class="btn ins hidden" title="Take insurance (Y)">INSURANCE YES</button>
+      <button id="btn-ins-no" class="btn ins hidden" title="Decline insurance (N)">NO</button>
+    </div>
+    <div class="minor">
+      <button id="btn-clear" class="btn small" title="Clear bet (C)">CLEAR</button>
+      <button id="btn-rebet" class="btn small" title="Rebet (B)">REBET</button>
+      <button id="btn-buyin" class="btn small" title="Buy in 500">+500</button>
+      <button id="btn-seat2" class="btn small" title="Second hand">OPEN 2ND SEAT</button>
+      <button id="btn-hint" class="btn small toggle" title="Basic strategy hints (T)">HINT</button>
+      <button id="btn-count" class="btn small toggle" title="Card count (K)">COUNT</button>
+      <button id="btn-help" class="btn icon" title="Help (?)">?</button>
+      <button id="btn-sound" class="btn icon" title="Mute (M)">&#128266;</button>
+      <input id="vol" type="range" min="0" max="1" step="0.01" title="Volume">
+    </div>
+    <div id="hint-text"></div>
+  </div>
+
+  <div id="help" class="hidden"><div class="panel"><h2>BLACKJACK &mdash; TABLE RULES</h2><div id="help-body"></div><button id="help-close" class="btn gold">CLOSE</button></div></div>
+  <div id="splash">
+    <div class="inner">
+      <img class="logo" src="assets/logo.png" alt="BLACKJACK" onerror="this.style.display='none'">
+      <div class="sub">SIX-DECK SHOE &middot; VEGAS STRIP RULES &middot; LIVE TABLE</div>
+      <div id="splash-text">LOADING&hellip;</div>
+      <div class="note">Unofficial recreation &middot; play money only &middot; sound on</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/audio-bj.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

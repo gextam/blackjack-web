@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Blackjack &mdash; Vegas Strip table recreation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A photoreal six-deck Vegas Strip blackjack table with a live-style dealer, basic-strategy regulars, hints and a Hi-Lo count, in plain HTML5 Canvas and Web Audio.">
+<meta property="og:title" content="Blackjack — Vegas Strip table recreation">
+<meta property="og:image" content="screenshots/hero.jpg">
+<style>
+  :root { --gold: #e9c250; --paper: #f3e9c8; --muted: #b7a77a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(ellipse at 50% 0%, #163a2a 0%, #06070c 60%); color: var(--paper); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.55; }
+  a { color: var(--gold); }
+  header { text-align: center; padding: 56px 20px 24px; }
+  header img.logo { width: min(700px, 92vw); filter: drop-shadow(0 0 30px rgba(255,200,90,.35)); }
+  header p.tag { letter-spacing: 5px; color: var(--muted); margin: 14px 0 28px; font-size: 14px; text-transform: uppercase; }
+  .cta { display: inline-block; padding: 16px 40px; border-radius: 14px; font-weight: 800; letter-spacing: 2px; color: #1a1200; text-decoration: none; background: linear-gradient(180deg, #fff3b0, #e9c250 40%, #b58900); box-shadow: 0 6px 0 #3a2a00, 0 14px 30px rgba(0,0,0,.6); }
+  .hero { display: block; width: min(1200px, 94vw); margin: 40px auto 0; border-radius: 14px; border: 2px solid #4a3b14; box-shadow: 0 30px 80px rgba(0,0,0,.8); }
+  main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+  h2 { font-family: Georgia, serif; color: var(--gold); letter-spacing: 3px; font-size: 24px; margin: 56px 0 18px; border-bottom: 1px solid #3a3012; padding-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .card { background: rgba(255,255,255,.03); border: 1px solid #3a3012; border-radius: 12px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 8px; color: #ffe9a8; font-size: 17px; } .card p { margin: 0; color: #d9ccaa; font-size: 15px; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; }
+  figure { margin: 0; } figure img { width: 100%; border-radius: 10px; border: 1px solid #3a3012; box-shadow: 0 12px 30px rgba(0,0,0,.6); }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; } td, th { border-bottom: 1px solid #2a2410; padding: 8px 10px; text-align: left; } th { color: var(--gold); }
+  footer { text-align: center; color: #7d6a3a; font-size: 13px; padding: 30px 20px 60px; }
+  code { background: #15131c; padding: 2px 6px; border-radius: 4px; color: #ffe9a8; }
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" src="../assets/logo.png" alt="BLACKJACK">
+  <p class="tag">Six-deck shoe &middot; Vegas Strip rules &middot; live table with regulars</p>
+  <a class="cta" href="../index.html">PLAY IN YOUR BROWSER</a>
+  <img class="hero" src="screenshots/hero.jpg" alt="The table mid-hand: split eights doubled, the dealer showing a six">
+</header>
+<main>
+  <h2>What it is</h2>
+  <p>An unofficial, play-money recreation of a Las Vegas Strip blackjack table in plain HTML5 Canvas, Web Audio and vanilla
+    JavaScript: a six-deck shoe with a cut card, the dealer standing on all 17s, blackjack paying 3 to 2, double on any two cards
+    and after splits, up to three hands, split aces receiving one card, insurance and late surrender. Three regulars play basic
+    strategy with their own money so the table feels alive; a hint toggle shows you the book play and a Hi-Lo counter shows
+    the running and true count.</p>
+  <h2>Features</h2>
+  <div class="grid">
+    <div class="card"><h3>Real procedure</h3><p>Cards slide from the shoe and flip with perspective; the dealer peeks under aces and tens, offers insurance, draws to 16, stands on 17; losing chips are swept, winners paid, cards go to the discard tray, and the shoe is cut and reshuffled.</p></div>
+    <div class="card"><h3>Full rule set</h3><p>Double any two, double after split, split to three hands, split aces one card, late surrender, insurance 2 to 1, table limits 5–500. Every rule is a switch in <code>js/config.js</code>.</p></div>
+    <div class="card"><h3>Verified maths</h3><p><code>node tools/sim.js</code> plays twenty million rounds of basic strategy with the game's own rule code: house edge 0.40% (0.47% without surrender, 0.58% with the dealer hitting soft 17). <code>node tools/test.js</code> runs 49 unit tests.</p></div>
+    <div class="card"><h3>A live table</h3><p>Dana, Ken and Victor bet and play basic strategy with their own bankrolls; open a second seat to play two hands. The dealer speaks: bets, insurance, totals, busts, blackjacks.</p></div>
+    <div class="card"><h3>Photoreal presentation</h3><p>Generated court figures on crisp vector cards, a photoreal dealer in a live-stream panel, mahogany rail, printed felt, chip stacks and payout flights.</p></div>
+    <div class="card"><h3>Full sound</h3><p>Card slides, snaps and flips, the shoe, shuffles, chips, win chimes and bust thuds synthesized in Web Audio, plus the dealer's generated voice lines.</p></div>
+  </div>
+  <h2>Screenshots</h2>
+  <div class="shots">
+    <figure><img src="screenshots/betting.jpg" alt="Betting"><figcaption>Place your bets: chips on the circle, the regulars already in.</figcaption></figure>
+    <figure><img src="screenshots/turn.jpg" alt="Your turn"><figcaption>A pair of eights against a six; the hint lights SPLIT.</figcaption></figure>
+    <figure><img src="screenshots/split.jpg" alt="Split and doubled"><figcaption>Both split hands doubled.</figcaption></figure>
+    <figure><img src="screenshots/dealer.jpg" alt="Dealer draws"><figcaption>The hole card flips and the dealer draws.</figcaption></figure>
+    <figure><img src="screenshots/settle.jpg" alt="Settlement"><figcaption>Payouts fly to the winners.</figcaption></figure>
+    <figure><img src="screenshots/insurance.jpg" alt="Insurance"><figcaption>Dealer shows an ace: insurance?</figcaption></figure>
+    <figure><img src="screenshots/dealerbj.jpg" alt="Dealer blackjack"><figcaption>Dealer blackjack.</figcaption></figure>
+    <figure><img src="screenshots/help.jpg" alt="Help"><figcaption>Table rules and the count panel.</figcaption></figure>
+  </div>
+  <h2>Controls</h2>
+  <table>
+    <tr><th>Action</th><th>Mouse</th><th>Keyboard</th></tr>
+    <tr><td>Bet</td><td>click a chip (adds to the selected seat) or the seat circle</td><td><code>1</code>–<code>4</code></td></tr>
+    <tr><td>Deal</td><td>DEAL</td><td><code>Space</code> / <code>D</code></td></tr>
+    <tr><td>Hit / Stand / Double / Split / Surrender</td><td>buttons</td><td><code>H</code> <code>S</code> <code>X</code> <code>P</code> <code>R</code></td></tr>
+    <tr><td>Insurance</td><td>INSURANCE YES / NO</td><td><code>Y</code> / <code>N</code></td></tr>
+    <tr><td>Clear / Rebet / second seat</td><td>CLEAR, REBET, OPEN 2ND SEAT</td><td><code>C</code> / <code>B</code></td></tr>
+    <tr><td>Hint / Count / Help / Mute</td><td>HINT, COUNT, ?, speaker</td><td><code>T</code> <code>K</code> <code>?</code> <code>M</code></td></tr>
+  </table>
+  <h2>Run it yourself</h2>
+  <p>Open <code>index.html</code>, or serve the folder (<code>python -m http.server 8767</code> or <code>start.cmd</code> on Windows). The README has the configuration reference, the simulator and the headless test tools.</p>
+</main>
+<footer>Unofficial recreation for entertainment only &middot; play money, no real wagering &middot; artwork and voice generated for this project, all other sound synthesized at runtime.</footer>
+</body>
+</html>
